@@ -38,12 +38,12 @@ tech.on('connection', (socket) => {
   // console.log('Inside tech.on("connection"), user connected')
 
   socket.on('message', (data) => {
-    console.log(`Inside tech.on("connection") in socket.on("message"), message: ${data.msg}`)
+    // console.log(`Inside tech.on("connection") in socket.on("message"), message: ${data.msg}`)
     tech.in(data.room).emit('message', data.msg)
   })
 
   socket.on('disconnect', () => {
-    console.log('Inside tech.on("connection") in socket.on("disconnect"), User Disconnected')
+    // console.log('Inside tech.on("connection") in socket.on("disconnect"), User Disconnected')
 
     // tech.emit is to display to client, So the below message is on browser(client)
     tech.emit('message', 'User disconnected')
