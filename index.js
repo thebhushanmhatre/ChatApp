@@ -14,15 +14,24 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html')
 })
 
+app.get('/javascript', (req, res) => {
+  res.sendFile(__dirname + '/public/javascript.html')
+})
+
 // tech namespace
 const tech = io.of('/tech')
 
 tech.on('connection', (socket) => {
-  console.log('Inside tech.on("connection"), user connected')
+  socket.on('join', (data) => {
+    socket.join(data.room)
+    tech.in(data.room).emit('message', `New User joined ${data.room} room!`)
+  })
 
-  socket.on('message', (msg) => {
-    console.log(`Inside tech.on("connection") in socket.on("message"), message: ${msg}`)
-    tech.emit('message', msg)
+  // console.log('Inside tech.on("connection"), user connected')
+
+  socket.on('message', (data) => {
+    console.log(`Inside tech.on("connection") in socket.on("message"), message: ${data.msg}`)
+    tech.in(data.room).emit('message', data.msg)
   })
 
   socket.on('disconnect', () => {
