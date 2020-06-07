@@ -18,6 +18,14 @@ app.get('/javascript', (req, res) => {
   res.sendFile(__dirname + '/public/javascript.html')
 })
 
+app.get('/ruby', (req, res) => {
+  res.sendFile(__dirname + '/public/ruby.html')
+})
+
+app.get('/python', (req, res) => {
+  res.sendFile(__dirname + '/public/python.html')
+})
+
 // tech namespace
 const tech = io.of('/tech')
 
